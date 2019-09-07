@@ -1,12 +1,12 @@
 import React from "react";
 import {storiesOf} from "@storybook/react";
 import {Container,Row,Col} from "reactstrap";
+import {Container as PageContainer} from "./stories.helper";
 import markdownNotes from "../markdowns/layout.markdown.md";
 
 const SingleColumnGrid = () =>{
     return(
-        <div style={{padding:"20px"}}>
-            <h3>Single column</h3>
+        <PageContainer title="Single column">
             <Row>
                 <Col>
                     <div style={{background:"#ddd",padding:"10px",border:"1px solid #ddd"}}>
@@ -14,14 +14,13 @@ const SingleColumnGrid = () =>{
                     </div>
                 </Col>
             </Row>
-        </div>
+        </PageContainer>
     )
 }
 
 const MultiColumnGrid = () =>{
     return(
-        <div style={{padding:"20px"}}>
-            <h3>Multi column</h3>
+        <PageContainer title="Multi column">
             <Row>
                 <Col>
                     <div style={{background:"#ddd",padding:"10px",border:"1px solid #ddd"}}>
@@ -39,14 +38,13 @@ const MultiColumnGrid = () =>{
                     </div>
                 </Col>
             </Row>
-        </div>
+        </PageContainer>
     )
 }
 
 const VaraibleColumnWidthGrid = () =>{
     return(
-        <div style={{padding:"20px"}}>
-            <h3> Varaible Column Width Grid</h3>
+        <PageContainer title="Varaible Column Width Grid">
             <Row>
                 <Col>
                     <div style={{background:"#ddd",padding:"10px",border:"1px solid #ddd"}}>
@@ -64,39 +62,13 @@ const VaraibleColumnWidthGrid = () =>{
                     </div>
                 </Col>
             </Row>
-        </div>
-    )
-}
-
-const ResponsiveColumnGrid = () =>{
-    return(
-        <div style={{padding:"20px"}}>
-            <h3> Different column pattern based on the screen size</h3>
-            <Row>
-                <Col xs="4" sm="6" md="3" lg="3">
-                    <div style={{background:"#ddd",padding:"10px",border:"1px solid #ddd"}}>
-                    Column 1
-                    </div>
-                </Col>
-                <Col xs="4" sm="3" md="6" lg="3">
-                    <div style={{background:"#ddd",padding:"10px",border:"1px solid #ddd"}}>
-                    Column 2
-                    </div>
-                </Col>
-                <Col xs="4" sm="3" md="3" lg="6">
-                    <div style={{background:"#ddd",padding:"10px",border:"1px solid #ddd"}}>
-                    Column 3
-                    </div>
-                </Col>
-            </Row>
-        </div>
+        </PageContainer>
     )
 }
 
 const NonFluidContainer = () =>{
     return(
-        <div style={{padding:"20px"}}>
-            <h3>Non Fluid Container</h3>
+        <PageContainer title="Non Fluid Container">
             <Container>
                 <Row>
                     <Col>
@@ -116,14 +88,13 @@ const NonFluidContainer = () =>{
                     </Col>
                 </Row>
             </Container>
-        </div>
+        </PageContainer>
     )
 }
 
 const FluidContainer = () =>{
     return(
-        <div style={{padding:"20px"}}>
-            <h3>Fluid Container</h3>
+        <PageContainer title="Fluid Container">
             <Container fluid>
                 <Row>
                     <Col>
@@ -143,11 +114,56 @@ const FluidContainer = () =>{
                     </Col>
                 </Row>
             </Container>
-        </div>
+        </PageContainer>
+    )
+}
+
+const ResponsiveLayout = () =>{
+    return(
+        <PageContainer title="Responsive Layout">
+            <Row>
+                <Col xs="12" md="12" >
+                    <div style={{background:"#ddd",padding:"10px",border:"1px solid #ddd",margin:"5px 0"}}>
+                    Header
+                    </div>
+                </Col>
+                <Col xs="12" md="6" >
+                    <div style={{background:"#ddd",padding:"10px",border:"1px solid #ddd",margin:"5px 0"}}>
+                    Column 1
+                    </div>
+                </Col>
+                <Col xs="12" md="6" >
+                    <div style={{background:"#ddd",padding:"10px",border:"1px solid #ddd",margin:"5px 0"}}>
+                    Column 2
+                    </div>
+                </Col>
+                <Col xs="12" md="12" >
+                    <div style={{background:"#ddd",padding:"10px",border:"1px solid #ddd",margin:"5px 0"}}>
+                    Footer
+                    </div>
+                </Col>
+            </Row>
+        </PageContainer>
+    )
+}
+
+const storyFunction=()=>{
+    return(
+        <React.Fragment>
+            <SingleColumnGrid /> 
+            <MultiColumnGrid /> 
+            <VaraibleColumnWidthGrid /> 
+            <NonFluidContainer /> 
+            <FluidContainer /> 
+        </React.Fragment>
     )
 }
 
 storiesOf("Layout",module)
-.add("Grids",()=><React.Fragment><SingleColumnGrid /> <MultiColumnGrid /> <VaraibleColumnWidthGrid /> <ResponsiveColumnGrid /><NonFluidContainer /> <FluidContainer /> </React.Fragment>,{
+.add("Grids",storyFunction,{
     notes:{markdown:markdownNotes}
 })
+.addParameters({ viewport: { defaultViewport: 'ipad' }})
+.add("iPad Layout",()=><ResponsiveLayout />)
+.addParameters({ viewport: { defaultViewport: 'iphone5' }})
+.add("iPhone 5 Layout",()=><ResponsiveLayout />)

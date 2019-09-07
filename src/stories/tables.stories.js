@@ -118,7 +118,17 @@ const HoverableTable = ()=>{
     )
 }
 
+const storyFunction = () =>{
+    return(
+        <React.Fragment>
+            <BasicTable />
+            <DarkTable /> 
+            <HoverableTable />
+        </React.Fragment>
+    )
+}
+
 storiesOf("UI Components",module)
-.add("Tables",()=><React.Fragment><BasicTable /><DarkTable /> <HoverableTable /></React.Fragment>,{
+.add("Tables",storyFunction,{
     notes:{markdown:markdownNotes}
 })

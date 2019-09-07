@@ -1,13 +1,13 @@
 import React from "react";
 import {storiesOf} from "@storybook/react"
 import {Button,ButtonGroup} from "reactstrap";
+import {Container} from "./stories.helper";
 import "bootstrap/dist/css/bootstrap.min.css";
 import markdownNotes from "../markdowns/buttons.markdown.md";
 
 const BasicButtons = ()=>{
     return(
-        <div style={{padding:"20px"}}>
-            <h3>Basic Buttons</h3>
+        <Container title="Basic Buttons">
             <Button color="primary">primary</Button>{' '}
             <Button color="secondary">secondary</Button>{' '}
             <Button color="success">success</Button>{' '}
@@ -15,26 +15,25 @@ const BasicButtons = ()=>{
             <Button color="warning">warning</Button>{' '}
             <Button color="danger">danger</Button>{' '}
             <Button color="link">link</Button>
-        </div>
+        </Container>
     )
 }
 const OutlineButtons =()=>{
     return(
-        <div style={{padding:"20px",clear:"both"}}>
-            <h3>Outline Buttons</h3>
+        <Container title="Outline Buttons">
             <Button outline color="primary">primary</Button>{' '}
             <Button outline color="secondary">secondary</Button>{' '}
             <Button outline color="success">success</Button>{' '}
             <Button outline color="info">info</Button>{' '}
             <Button outline color="warning">warning</Button>{' '}
             <Button outline color="danger">danger</Button>
-        </div>
+        </Container>
     )
 }
 
 const ButtonSizes =()=>{
     return(
-        <div style={{padding:"20px"}}>
+        <Container>
             <div style={{width:"50%",float:"left"}}>
             <h3>Large Buttons</h3>
             <ButtonGroup size="lg">
@@ -51,13 +50,13 @@ const ButtonSizes =()=>{
                 <Button color="danger">Right</Button>
             </ButtonGroup>
             </div>
-        </div>
+        </Container>
     )
 }
 
 const ButtonGroups=()=>{
     return(
-        <div style={{padding:"20px"}}>
+        <Container>
             <div style={{width:"50%",float:"left"}}>
             <h3>Horizontal Button Groups</h3>
             <ButtonGroup>
@@ -74,11 +73,21 @@ const ButtonGroups=()=>{
                 <Button color="danger">Right</Button>
             </ButtonGroup>
             </div>
-        </div>
+        </Container>
     )
 }
 
+const storyFunction = () =>{
+    return(
+        <React.Fragment>
+            <BasicButtons />
+            <ButtonSizes /> 
+            <OutlineButtons /> 
+            <ButtonGroups/>
+        </React.Fragment>
+    )
+}
 storiesOf("UI Components",module)
-.add("Buttons",()=><React.Fragment><BasicButtons /> <ButtonSizes /> <OutlineButtons /> <ButtonGroups/></React.Fragment>,{
+.add("Buttons",storyFunction,{
     notes:{markdown:markdownNotes}
 })
